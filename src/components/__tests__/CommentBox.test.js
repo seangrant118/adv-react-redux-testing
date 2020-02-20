@@ -24,3 +24,14 @@ it("has a textarea that users can type in", () => {
   wrapper.update();
   expect(wrapper.find("textarea").prop("value")).toBe("new comment");
 });
+
+it("empties textarea when form is submitted", () => {
+  wrapper.find("textarea").simulate("change", {
+    target: { value: "new comment" }
+  });
+  wrapper.update();
+  expect(wrapper.find("textarea").prop("value")).toBe("new comment");
+  wrapper.find("form").simulate("submit");
+  wrapper.update();
+  expect(wrapper.find("textarea").prop("value")).toBe("");
+});
