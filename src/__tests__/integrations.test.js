@@ -24,7 +24,7 @@ it("can fetch a list of comments and display them", done => {
   );
   wrapper.find(".fetch-comments").simulate("click");
   // introduce a pause
-  setTimeout(() => {
+  moxios.wait(() => {
     wrapper.update();
     expect(wrapper.find("li").length).toEqual(2);
 
