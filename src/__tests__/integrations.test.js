@@ -16,12 +16,19 @@ afterEach(() => {
   moxios.uninstall();
 });
 
-it("can fetch a list of comments and display them", () => {
+it("can fetch a list of comments and display them", done => {
   const wrapper = mount(
     <Root>
       <App />
     </Root>
   );
   wrapper.find(".fetch-comments").simulate("click");
-  expect(wrapper.find("li").length).toEqual(2);
+  // introduce a pause
+  setTimeout(() => {
+    wrapper.update();
+    expect(wrapper.find("li").length).toEqual(2);
+
+    done();
+    wrapper.unmount();
+  }, 100);
 });
